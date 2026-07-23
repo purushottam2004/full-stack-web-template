@@ -1,6 +1,7 @@
 # pylint: disable=broad-exception-caught
 """
 Module Exposes a function to test if all API and SECURE KEYs are work
+All Ping Functions should be inside the class 'Pings' and should start with 'ping_'
 """
 
 import os
@@ -16,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_LITELLM_PING_PROMPT = "Say OK"
 
-class PINGS:
+class Pings:
 
     def with_retries(retries: int = 5, initial_delay: float = 1.0):
         """Decorator to retry a function with exponential backoff."""

@@ -1,0 +1,15 @@
+# Supabase
+.branches
+.temp
+
+# dotenvx
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Virtual environment
+.venv/
+
+# cache files
+*/__pycache__/*
