@@ -64,7 +64,7 @@ def create_app() -> FastAPI:
             },
         )
     else:
-        # Development mode: allow localhost, Vercel previews, and skolist.com
+        # Development mode: allow localhost, Vercel previews, and your_domain.com
         dev_origin_pattern = (
             r"http://(localhost|127\.0\.0\.1)(:\d+)?" r"|https://.*\.vercel\.app" r"|https://.*\.your_domain\.com"
         )
@@ -79,7 +79,7 @@ def create_app() -> FastAPI:
             "CORS configured",
             extra={
                 "deployment_env": DEPLOYMENT_ENV,
-                "allow_origin_pattern": "localhost, vercel.app, skolist.com",
+                "allow_origin_pattern": "localhost, vercel.app, your_domain.com",
             },
         )
 
