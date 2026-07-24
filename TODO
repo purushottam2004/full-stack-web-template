@@ -1,5 +1,0 @@
-1] Writing the supabase remote connection setup guide for linking to the remote project first time, and pulling the initial migrations.
-2] Writing the public.users table migration (for which the seeds have been already written)
-3] Writing the masterscript for direct setup of all three sub services (backend, frontend & Supabase)
-4] Specifying that the migration seeds are to be executed only once when creatig a project via de-templatizing this repo
-3] Using the ping functions in backend/app.py
