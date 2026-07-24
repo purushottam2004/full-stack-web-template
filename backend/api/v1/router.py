@@ -2,6 +2,7 @@
 API v1 router with authentication dependency and a sample endpoint.
 """
 
+from http import HTTPStatus
 import logging
 
 from fastapi import APIRouter, Depends, Request
@@ -17,7 +18,7 @@ router = APIRouter(
     # dependencies=[Depends(require_supabase_user)], # Removed global dependency
 )
 
-
+# Intentionally required authentication
 @router.get("/hello", dependencies=[Depends(require_supabase_user)])
 def hello(request: Request) -> dict:
     """
@@ -36,3 +37,8 @@ def hello(request: Request) -> dict:
         "authenticated": True,
         "user": {"id": user_id, "email": email},
     }
+
+# Intentionally kept unauthenticated
+@router.get('/health')
+def health(request: Request) -> HTTPStatus:
+    return HTTPStatus.OK

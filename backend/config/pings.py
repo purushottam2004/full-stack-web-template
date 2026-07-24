@@ -107,7 +107,7 @@ class Pings:
     @with_retries(retries=5)
     def ping_gemini_api_key():
         """To Check if Gemini Key works"""
-        return PINGS._ping_litellm_api_key(
+        return Pings._ping_litellm_api_key(
             env_var="GEMINI_API_KEY",
             model="gemini/gemini-2.5-flash",
             provider_name="Gemini",
@@ -117,7 +117,7 @@ class Pings:
     @with_retries(retries=5)
     def ping_openai_api_key() -> bool:
         """To Check if OPENAI API KEY works"""
-        return PINGS._ping_litellm_api_key(
+        return Pings._ping_litellm_api_key(
             env_var="OPENAI_API_KEY",
             model="openai/gpt-4.1-mini",
             provider_name="OpenAI",
@@ -127,7 +127,7 @@ class Pings:
     @with_retries(retries=5)
     def ping_anthropic_api_key() -> bool:
         """To Check if Anthropic API KEY works"""
-        return PINGS._ping_litellm_api_key(
+        return Pings._ping_litellm_api_key(
             env_var="ANTHROPIC_API_KEY",
             model="anthropic/claude-3-5-sonnet-latest",
             provider_name="Anthropic",
@@ -136,24 +136,24 @@ class Pings:
 
     @with_retries(retries=5)
     def ping_supabase_connection() -> bool:
-        """To check if SUPABASE_URL and SUPABASE_ANON_KEY works"""
+        """To check if SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY work"""
         supabase_url = os.getenv("SUPABASE_URL")
-        supabase_anon_key = os.getenv("SUPABASE_ANON_KEY")
+        publishable_key = os.getenv("SUPABASE_PUBLISHABLE_KEY") or os.getenv("SUPABASE_ANON_KEY")
 
-        if not supabase_url or not supabase_anon_key:
+        if not supabase_url or not publishable_key:
             logger.warning(
                 "Supabase connection details are not set",
                 extra={
                     "status": "failure",
-                    "error": "SUPABASE_URL or SUPABASE_ANON_KEY environment variables are missing",
+                    "error": "SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY environment variables are missing",
                 },
             )
             return False
 
         try:
             headers = {
-                "apikey": supabase_anon_key,
-                "Authorization": f"Bearer {supabase_anon_key}",
+                "apikey": publishable_key,
+                "Authorization": f"Bearer {publishable_key}",
             }
 
             r = requests.get(f"{supabase_url}/rest/v1/", headers=headers, timeout=5)

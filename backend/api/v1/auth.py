@@ -10,7 +10,7 @@ from typing import Any
 from fastapi import Header, HTTPException, Request, status
 from supabase import AsyncClient, Client, acreate_client, create_client
 
-from config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
+from config.settings import SUPABASE_SECRET_KEY, SUPABASE_URL
 
 logger = logging.getLogger(__name__)
 
@@ -44,9 +44,9 @@ def get_supabase_client() -> Client:
     """
     if not SUPABASE_URL:
         raise RuntimeError("SUPABASE_URL is not set")
-    if not SUPABASE_SERVICE_KEY:
-        raise RuntimeError("SUPABASE_SERVICE_KEY is not set")
-    return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+    if not SUPABASE_SECRET_KEY:
+        raise RuntimeError("SUPABASE_SECRET_KEY is not set")
+    return create_client(SUPABASE_URL, SUPABASE_SECRET_KEY)
 
 
 async def get_async_supabase_client() -> AsyncClient:
@@ -60,9 +60,9 @@ async def get_async_supabase_client() -> AsyncClient:
             if _async_supabase_client is None:
                 if not SUPABASE_URL:
                     raise RuntimeError("SUPABASE_URL is not set")
-                if not SUPABASE_SERVICE_KEY:
-                    raise RuntimeError("SUPABASE_SERVICE_KEY is not set")
-                _async_supabase_client = await acreate_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+                if not SUPABASE_SECRET_KEY:
+                    raise RuntimeError("SUPABASE_SECRET_KEY is not set")
+                _async_supabase_client = await acreate_client(SUPABASE_URL, SUPABASE_SECRET_KEY)
     return _async_supabase_client
 
 

@@ -10,6 +10,7 @@
 
 # Virtual environment
 .venv/
+venv/
 
 # cache files
-*/__pycache__/*
+__pycache__/

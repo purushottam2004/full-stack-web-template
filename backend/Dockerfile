@@ -12,8 +12,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # Copy requirements first for better caching
 COPY requirements.txt .
 
-# Upgrade pip
-RUN pip install --upgrade pip
+# Install dependencies
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy application code
 COPY . .
